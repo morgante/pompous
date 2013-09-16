@@ -59,13 +59,13 @@ class pompous extends Plugin {
 			if(isset($record->name)) {
 				$records[$id]['name'] = strval($record->name);
 			}
-
-			if(isset($record->name)) {
-				$records[$id]['name'] = strval($record->name);
-			}
-
+			
 			if(isset($record->description)) {
 				$records[$id]['description'] = strval($record->description);
+			}
+			
+			if(isset($record->location)) {
+				$records[$id]['location'] = strval($record->location);
 			}
 
 			if(isset($record->link)) {
@@ -122,16 +122,10 @@ class pompous extends Plugin {
 			}
 
 			if(isset($record->start) && isset($record->end)) {
-				$records[$id]['time']['start'] = strtotime(strval($record->start));
-				$records[$id]['time']['end'] = strtotime(strval($record->end));
+				$records[$id]['time']['start'] = HabariDateTime::date_create(strval($record->start));
+				$records[$id]['time']['end'] = HabariDateTime::date_create(strval($record->end));
 			} elseif(isset($record->end)) {
-				$records[$id]['time'] = strtotime(strval($record->end));
-			}
-
-			if(isset($record->featured)) {
-				$records[$id]['featured'] = 'true';
-			} else {
-				$records[$id]['featured'] = 'false';
+				$records[$id]['time'] = HabariDateTime::date_create(strval($record->end));
 			}
 
 			if(isset($record->quote)) {
