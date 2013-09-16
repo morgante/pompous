@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pluggable type="plugin">
+	<name>Pompous</name>
+	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
+	<author url="http://morgante.net">Morgante Pell</author>
+	<version>1.0</version>
+	<url>http://lab.morgante.net/pompous</url>
+	<description><![CDATA[Provides an experience contact type which can be displayed all over.]]></description>
+	<copyright>2013</copyright>
+</pluggable>
