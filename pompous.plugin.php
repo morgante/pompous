@@ -23,7 +23,7 @@ class pompous extends Plugin {
 	 */
 	private static function fetch_resume($url) {
 		
-		if (Cache::has('pompous__resume')) {
+		if (Cache::has('pompous__resume') && false) {
 			$content = Cache::get('pompous__resume');
 		} else {
 			$content = RemoteRequest::get_contents($url);
@@ -52,10 +52,6 @@ class pompous extends Plugin {
 				$records[$id]['type'] = strval($record['type']);
 			}
 
-			if(isset($record['scope'])) {
-				$records[$id]['scope'] = strval($record['scope']);
-			}
-
 			if(isset($record->name)) {
 				$records[$id]['name'] = strval($record->name);
 			}
@@ -75,6 +71,11 @@ class pompous extends Plugin {
 			if(isset($record->tags)) {
 				$tags = strval($record->tags);
 				$records[$id]['tags'] = explode(' ', $tags);
+			}
+
+			if(isset($record->scopes)) {
+				$scopes = strval($record->scopes);
+				$records[$id]['scopes'] = explode(' ', $scopes);
 			}
 
 			if(isset($record->role)) {
@@ -124,8 +125,8 @@ class pompous extends Plugin {
 			if(isset($record->start) && isset($record->end)) {
 				$records[$id]['time']['start'] = HabariDateTime::date_create(strval($record->start));
 				$records[$id]['time']['end'] = HabariDateTime::date_create(strval($record->end));
-			} elseif(isset($record->end)) {
-				$records[$id]['time'] = HabariDateTime::date_create(strval($record->end));
+			} elseif(isset($record->start)) {
+				$records[$id]['time']['start'] = HabariDateTime::date_create(strval($record->start));
 			}
 
 			if(isset($record->quote)) {
@@ -210,6 +211,8 @@ class pompous extends Plugin {
 		
 		if($search != '') {
 			$searches = explode(' ', $search);
+		} else {
+			$searches = array();
 		}
 
 		foreach($searches as $search) {
